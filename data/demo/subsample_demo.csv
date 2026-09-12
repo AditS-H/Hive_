@@ -1,0 +1,32 @@
+tweet_id,author_id,inbound,created_at,text,response_tweet_id,in_response_to_tweet_id
+1000,cust_001,True,Mon Mar 10 12:00:00 +0000 2024,My app keeps crashing every time I open it on iOS 17,1001,
+1001,DemoBrandCares,False,Mon Mar 10 12:05:00 +0000 2024,"Sorry about that! Please delete the app, restart your phone, and reinstall from the App Store -- that clears the cache causing crashes. ^Demo",,1000.0
+1002,cust_002,True,Mon Mar 10 12:00:00 +0000 2024,"I was charged twice this month for my subscription, $12.99 twice",1003,
+1003,DemoBrandCares,False,Mon Mar 10 12:05:00 +0000 2024,That looks like a duplicate charge. Check your receipts at ourapp.com/account -- if you see two charges on the same date we'll refund the extra one within 3-5 business days. ^Demo,,1002.0
+1004,cust_003,True,Mon Mar 10 12:00:00 +0000 2024,How do I cancel my premium plan before renewal?,1005,
+1005,DemoBrandCares,False,Mon Mar 10 12:05:00 +0000 2024,You can cancel anytime from Settings > Plan > Cancel Subscription. You'll keep access until the end of your current billing period. ^Demo,,1004.0
+1006,cust_004,True,Mon Mar 10 12:00:00 +0000 2024,I forgot my password and the reset email never arrives,1007,
+1007,DemoBrandCares,False,Mon Mar 10 12:05:00 +0000 2024,"Try checking your spam folder first. If it's not there, go to ourapp.com/reset and make sure you're using the email on your account. ^Demo",,1006.0
+1008,cust_005,True,Mon Mar 10 12:00:00 +0000 2024,Where is the dark mode setting? I can't find it,1009,
+1009,DemoBrandCares,False,Mon Mar 10 12:05:00 +0000 2024,It's under Settings > Appearance > Dark Mode. Toggle it on and it applies instantly. ^Demo,,1008.0
+1010,cust_006,True,Mon Mar 10 12:00:00 +0000 2024,Someone logged into my account from another country and changed my email,1011,
+1011,DemoBrandCares,False,Mon Mar 10 12:05:00 +0000 2024,"This needs immediate attention -- please go to ourapp.com/secure-account to lock your account, our safety team will follow up directly. ^Demo",,1010.0
+1012,cust_007,True,Mon Mar 10 12:00:00 +0000 2024,My order says delivered but I never received the package,1013,
+1013,DemoBrandCares,False,Mon Mar 10 12:05:00 +0000 2024,"Sorry to hear that! Carriers sometimes mark packages delivered early. If it hasn't shown up in 24 hours, go to Your Orders > Problem with Order for a replacement. ^Demo",,1012.0
+1014,cust_008,True,Mon Mar 10 12:00:00 +0000 2024,App crashes immediately on launch after the latest update,1015,
+1015,DemoBrandCares,False,Mon Mar 10 12:05:00 +0000 2024,"Thanks for flagging -- try a clean reinstall (delete app, restart device, reinstall). That resolves this for most people after an update. ^Demo",,1014.0
+1016,cust_009,True,Mon Mar 10 12:00:00 +0000 2024,The checkout page freezes when I try to pay with a new card,1017,
+1017,DemoBrandCares,False,Mon Mar 10 12:05:00 +0000 2024,Sorry about that! Try switching to a different browser or clearing your cache -- the checkout freeze usually clears up right after. ^Demo,,1016.0
+1018,cust_010,True,Mon Mar 10 12:00:00 +0000 2024,Can I share my playlist with a friend who doesn't have an account?,1019,
+1019,DemoBrandCares,False,Mon Mar 10 12:05:00 +0000 2024,"Yes! Use the Share button and send the link -- they can listen to a preview without signing up, full access needs a free account. ^Demo",,1018.0
+1020,cust_101,True,Mon Mar 10 12:00:00 +0000 2024,Why was I charged for something I didn't order?,1021,
+1021,OtherBrandHelp,False,Mon Mar 10 12:05:00 +0000 2024,Please DM us your order number so we can look into this for you.,,1020.0
+1022,cust_101,True,Mon Mar 10 12:10:00 +0000 2024,"I already tried that, still no response after 3 days",,1021.0
+1023,cust_102,True,Mon Mar 10 12:00:00 +0000 2024,My account got locked for no reason,1024,
+1024,OtherBrandHelp,False,Mon Mar 10 12:05:00 +0000 2024,Send us a DM with your account email and we'll investigate.,,1023.0
+1025,cust_103,True,Mon Mar 10 12:00:00 +0000 2024,App won't open at all now,1026,
+1026,OtherBrandHelp,False,Mon Mar 10 12:05:00 +0000 2024,Please DM us your device model and OS version.,,1025.0
+1027,cust_104,True,Mon Mar 10 12:00:00 +0000 2024,I need a refund for a broken item,1028,
+1028,OtherBrandHelp,False,Mon Mar 10 12:05:00 +0000 2024,Kindly follow and DM us your order ID.,,1027.0
+1029,cust_105,True,Mon Mar 10 12:00:00 +0000 2024,Is there a way to change my username?,1030,
+1030,OtherBrandHelp,False,Mon Mar 10 12:05:00 +0000 2024,We hear you -- please DM us for account-specific help.,,1029.0

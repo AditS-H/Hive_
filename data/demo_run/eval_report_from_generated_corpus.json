@@ -1,0 +1,1658 @@
+{
+  "timestamp": "2026-09-12T20:44:51.956906+00:00",
+  "sample_size": 12,
+  "classification": {
+    "accuracy": 1.0,
+    "macro_f1": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "cohen_kappa": 1.0,
+    "n": 12
+  },
+  "hallucination_rate": 0.0,
+  "avg_groundedness": 4.0,
+  "avg_tone_match": 4.0,
+  "avg_resolution_quality": 4.0,
+  "auto_handle_rate": 0.5833333333333334,
+  "escalation_rate": 0.4166666666666667,
+  "escalation_accuracy": 0.8333333333333334,
+  "avg_latency_ms": 8.5,
+  "baselines": [
+    {
+      "name": "Majority Class",
+      "metrics": {
+        "accuracy": 0.16666666666666666,
+        "macro_f1": 0.05555555555555555,
+        "precision": 0.041666666666666664,
+        "recall": 0.08333333333333333,
+        "cohen_kappa": -0.11111111111111116,
+        "n": 12
+      },
+      "n_splits": 5,
+      "stratified": false
+    },
+    {
+      "name": "TF-IDF + Logistic Regression",
+      "metrics": {
+        "accuracy": 0.16666666666666666,
+        "macro_f1": 0.0625,
+        "precision": 0.05,
+        "recall": 0.08333333333333333,
+        "cohen_kappa": -0.016949152542373058,
+        "n": 12
+      },
+      "n_splits": 5,
+      "stratified": false
+    }
+  ],
+  "case_results": [
+    {
+      "test_case": {
+        "id": "gold_001",
+        "customer_msg": "the app crashed again right when I opened it, this keeps happening",
+        "ground_truth_intent": "product_issue_or_bug",
+        "ground_truth_resolution": "Suggest a clean reinstall: delete app, restart device, reinstall from store.",
+        "difficulty": "easy",
+        "expected_action": "auto_handle",
+        "risk_factors": []
+      },
+      "pipeline_result": {
+        "id": "exec_df5f0b2b1802",
+        "timestamp": "2026-09-12T20:44:51.852432+00:00",
+        "message_text": "the app crashed again right when I opened it, this keeps happening",
+        "message_author": "@golden_set",
+        "classification": {
+          "intent": "product_issue_or_bug",
+          "confidence": 0.9,
+          "reasoning": "[fake-llm] keyword rule matched intent=product_issue_or_bug",
+          "sentiment": "neutral",
+          "urgency": "low",
+          "latency_ms": 0
+        },
+        "retrieval": {
+          "precedents": [
+            {
+              "customer_msg": "My app keeps crashing every time I open it on iOS 17",
+              "resolution": "Sorry about that! Please delete the app, restart your phone, and reinstall from the App Store -- that clears the cache causing crashes. ^Demo",
+              "similarity": 0.7731505632400513
+            },
+            {
+              "customer_msg": "App crashes immediately on launch after the latest update",
+              "resolution": "Thanks for flagging -- try a clean reinstall (delete app, restart device, reinstall). That resolves this for most people after an update. ^Demo",
+              "similarity": 0.7261877059936523
+            },
+            {
+              "customer_msg": "The checkout page freezes when I try to pay with a new card",
+              "resolution": "Sorry about that! Try switching to a different browser or clearing your cache -- the checkout freeze usually clears up right after. ^Demo",
+              "similarity": 0.29061296582221985
+            }
+          ],
+          "top_similarity": 0.7731505632400513,
+          "latency_ms": 25
+        },
+        "draft": {
+          "text": "Sorry about that! Please delete the app, restart your phone, and reinstall from the App Store -- that clears the cache causing crashes. ^Demo",
+          "grounding_source_count": 3,
+          "signoff_used": "^Demo",
+          "latency_ms": 0
+        },
+        "escalation": {
+          "decision": "auto_handle",
+          "rules": [
+            {
+              "id": "rule_confidence",
+              "name": "Intent Classification Confidence",
+              "description": "Requires classification confidence >= 76%",
+              "passed": true,
+              "actual_value": "90.0%",
+              "threshold": ">= 76%",
+              "reason": "Intent confidently detected by classifier",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_grounding",
+              "name": "Historical Precedent Grounding",
+              "description": "Requires top precedent similarity >= 58%",
+              "passed": true,
+              "actual_value": "77.3%",
+              "threshold": ">= 58%",
+              "reason": "Strong precedent grounding (77.3% cosine match)",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_risk_keywords",
+              "name": "High-Risk & Legal Keyword Scan",
+              "description": "Screens for litigation, regulatory complaints, fraud, or chargeback threats",
+              "passed": true,
+              "actual_value": "None detected",
+              "threshold": "0 sensitive keywords",
+              "reason": "No high-risk litigation or fraud keywords found",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_sentiment",
+              "name": "Customer Distress & Hostility Check",
+              "description": "Requires human escalation when severe customer rage or hostility is detected",
+              "passed": true,
+              "actual_value": "neutral (urgency: low)",
+              "threshold": "Non-furious / non-critical",
+              "reason": "Customer tone within standard operational tolerance",
+              "severity": "warning"
+            },
+            {
+              "id": "rule_intent_restriction",
+              "name": "Policy-Restricted Intent Check",
+              "description": "Guarantees human review for sensitive categories (e.g. security compromise)",
+              "passed": true,
+              "actual_value": "product_issue_or_bug",
+              "threshold": "Not on mandatory escalation list",
+              "reason": "Intent is authorized for automated handling",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_hallucination_guard",
+              "name": "Grounded Output Factuality Check",
+              "description": "Prevents drafting unauthorized financial amounts or unverifiable commitments",
+              "passed": true,
+              "actual_value": "Compliant",
+              "threshold": "100% grounded facts",
+              "reason": "Draft strictly reflects precedent without hallucinating unverified figures",
+              "severity": "blocker"
+            }
+          ],
+          "trigger_reasons": [],
+          "routed_queue": null,
+          "audit_explanation": "All 6 auditable rules passed with high confidence and verified precedent grounding. Auto-handling approved."
+        },
+        "total_latency_ms": 26
+      },
+      "judge": {
+        "test_case_id": "gold_001",
+        "groundedness": 4,
+        "tone_match": 4,
+        "resolution_quality": 4,
+        "hallucination_flag": 0,
+        "notes": "[fake-llm] heuristic score based on precedent availability only.",
+        "overall_score": 4.0
+      },
+      "is_correct_intent": true,
+      "escalation_matches_expected": true
+    },
+    {
+      "test_case": {
+        "id": "gold_002",
+        "customer_msg": "I think I got billed twice for this month's subscription",
+        "ground_truth_intent": "billing_refund_dispute",
+        "ground_truth_resolution": "Point to receipts page; refund the duplicate charge within 3-5 business days.",
+        "difficulty": "easy",
+        "expected_action": "auto_handle",
+        "risk_factors": []
+      },
+      "pipeline_result": {
+        "id": "exec_e1ebdeb7869b",
+        "timestamp": "2026-09-12T20:44:51.860433+00:00",
+        "message_text": "I think I got billed twice for this month's subscription",
+        "message_author": "@golden_set",
+        "classification": {
+          "intent": "billing_refund_dispute",
+          "confidence": 0.9,
+          "reasoning": "[fake-llm] keyword rule matched intent=billing_refund_dispute",
+          "sentiment": "neutral",
+          "urgency": "low",
+          "latency_ms": 0
+        },
+        "retrieval": {
+          "precedents": [
+            {
+              "customer_msg": "I was charged twice this month for my subscription, $12.99 twice",
+              "resolution": "That looks like a duplicate charge. Check your receipts at ourapp.com/account -- if you see two charges on the same date we'll refund the extra one within 3-5 business days. ^Demo",
+              "similarity": 0.8463654518127441
+            },
+            {
+              "customer_msg": "How do I cancel my premium plan before renewal?",
+              "resolution": "You can cancel anytime from Settings > Plan > Cancel Subscription. You'll keep access until the end of your current billing period. ^Demo",
+              "similarity": 0.4641987085342407
+            },
+            {
+              "customer_msg": "I forgot my password and the reset email never arrives",
+              "resolution": "Try checking your spam folder first. If it's not there, go to ourapp.com/reset and make sure you're using the email on your account. ^Demo",
+              "similarity": 0.3328988552093506
+            }
+          ],
+          "top_similarity": 0.8463654518127441,
+          "latency_ms": 7
+        },
+        "draft": {
+          "text": "That looks like a duplicate charge. Check your receipts at ourapp.com/account -- if you see two charges on the same date we'll refund the extra one within 3-5 business days. ^Demo",
+          "grounding_source_count": 3,
+          "signoff_used": "^Demo",
+          "latency_ms": 0
+        },
+        "escalation": {
+          "decision": "auto_handle",
+          "rules": [
+            {
+              "id": "rule_confidence",
+              "name": "Intent Classification Confidence",
+              "description": "Requires classification confidence >= 76%",
+              "passed": true,
+              "actual_value": "90.0%",
+              "threshold": ">= 76%",
+              "reason": "Intent confidently detected by classifier",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_grounding",
+              "name": "Historical Precedent Grounding",
+              "description": "Requires top precedent similarity >= 58%",
+              "passed": true,
+              "actual_value": "84.6%",
+              "threshold": ">= 58%",
+              "reason": "Strong precedent grounding (84.6% cosine match)",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_risk_keywords",
+              "name": "High-Risk & Legal Keyword Scan",
+              "description": "Screens for litigation, regulatory complaints, fraud, or chargeback threats",
+              "passed": true,
+              "actual_value": "None detected",
+              "threshold": "0 sensitive keywords",
+              "reason": "No high-risk litigation or fraud keywords found",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_sentiment",
+              "name": "Customer Distress & Hostility Check",
+              "description": "Requires human escalation when severe customer rage or hostility is detected",
+              "passed": true,
+              "actual_value": "neutral (urgency: low)",
+              "threshold": "Non-furious / non-critical",
+              "reason": "Customer tone within standard operational tolerance",
+              "severity": "warning"
+            },
+            {
+              "id": "rule_intent_restriction",
+              "name": "Policy-Restricted Intent Check",
+              "description": "Guarantees human review for sensitive categories (e.g. security compromise)",
+              "passed": true,
+              "actual_value": "billing_refund_dispute",
+              "threshold": "Not on mandatory escalation list",
+              "reason": "Intent is authorized for automated handling",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_hallucination_guard",
+              "name": "Grounded Output Factuality Check",
+              "description": "Prevents drafting unauthorized financial amounts or unverifiable commitments",
+              "passed": true,
+              "actual_value": "Compliant",
+              "threshold": "100% grounded facts",
+              "reason": "Draft strictly reflects precedent without hallucinating unverified figures",
+              "severity": "blocker"
+            }
+          ],
+          "trigger_reasons": [],
+          "routed_queue": null,
+          "audit_explanation": "All 6 auditable rules passed with high confidence and verified precedent grounding. Auto-handling approved."
+        },
+        "total_latency_ms": 7
+      },
+      "judge": {
+        "test_case_id": "gold_002",
+        "groundedness": 4,
+        "tone_match": 4,
+        "resolution_quality": 4,
+        "hallucination_flag": 0,
+        "notes": "[fake-llm] heuristic score based on precedent availability only.",
+        "overall_score": 4.0
+      },
+      "is_correct_intent": true,
+      "escalation_matches_expected": true
+    },
+    {
+      "test_case": {
+        "id": "gold_003",
+        "customer_msg": "how do I turn off my subscription so it doesn't renew",
+        "ground_truth_intent": "subscription_or_plan_change",
+        "ground_truth_resolution": "Cancel via Settings > Plan > Cancel Subscription; access continues until period end.",
+        "difficulty": "easy",
+        "expected_action": "auto_handle",
+        "risk_factors": []
+      },
+      "pipeline_result": {
+        "id": "exec_0e34e9e7e292",
+        "timestamp": "2026-09-12T20:44:51.867009+00:00",
+        "message_text": "how do I turn off my subscription so it doesn't renew",
+        "message_author": "@golden_set",
+        "classification": {
+          "intent": "subscription_or_plan_change",
+          "confidence": 0.9,
+          "reasoning": "[fake-llm] keyword rule matched intent=subscription_or_plan_change",
+          "sentiment": "neutral",
+          "urgency": "low",
+          "latency_ms": 0
+        },
+        "retrieval": {
+          "precedents": [
+            {
+              "customer_msg": "How do I cancel my premium plan before renewal?",
+              "resolution": "You can cancel anytime from Settings > Plan > Cancel Subscription. You'll keep access until the end of your current billing period. ^Demo",
+              "similarity": 0.6892352104187012
+            },
+            {
+              "customer_msg": "I was charged twice this month for my subscription, $12.99 twice",
+              "resolution": "That looks like a duplicate charge. Check your receipts at ourapp.com/account -- if you see two charges on the same date we'll refund the extra one within 3-5 business days. ^Demo",
+              "similarity": 0.49289265275001526
+            },
+            {
+              "customer_msg": "I forgot my password and the reset email never arrives",
+              "resolution": "Try checking your spam folder first. If it's not there, go to ourapp.com/reset and make sure you're using the email on your account. ^Demo",
+              "similarity": 0.2813141345977783
+            }
+          ],
+          "top_similarity": 0.6892352104187012,
+          "latency_ms": 6
+        },
+        "draft": {
+          "text": "You can cancel anytime from Settings > Plan > Cancel Subscription. You'll keep access until the end of your current billing period. ^Demo",
+          "grounding_source_count": 3,
+          "signoff_used": "^Demo",
+          "latency_ms": 0
+        },
+        "escalation": {
+          "decision": "auto_handle",
+          "rules": [
+            {
+              "id": "rule_confidence",
+              "name": "Intent Classification Confidence",
+              "description": "Requires classification confidence >= 76%",
+              "passed": true,
+              "actual_value": "90.0%",
+              "threshold": ">= 76%",
+              "reason": "Intent confidently detected by classifier",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_grounding",
+              "name": "Historical Precedent Grounding",
+              "description": "Requires top precedent similarity >= 58%",
+              "passed": true,
+              "actual_value": "68.9%",
+              "threshold": ">= 58%",
+              "reason": "Strong precedent grounding (68.9% cosine match)",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_risk_keywords",
+              "name": "High-Risk & Legal Keyword Scan",
+              "description": "Screens for litigation, regulatory complaints, fraud, or chargeback threats",
+              "passed": true,
+              "actual_value": "None detected",
+              "threshold": "0 sensitive keywords",
+              "reason": "No high-risk litigation or fraud keywords found",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_sentiment",
+              "name": "Customer Distress & Hostility Check",
+              "description": "Requires human escalation when severe customer rage or hostility is detected",
+              "passed": true,
+              "actual_value": "neutral (urgency: low)",
+              "threshold": "Non-furious / non-critical",
+              "reason": "Customer tone within standard operational tolerance",
+              "severity": "warning"
+            },
+            {
+              "id": "rule_intent_restriction",
+              "name": "Policy-Restricted Intent Check",
+              "description": "Guarantees human review for sensitive categories (e.g. security compromise)",
+              "passed": true,
+              "actual_value": "subscription_or_plan_change",
+              "threshold": "Not on mandatory escalation list",
+              "reason": "Intent is authorized for automated handling",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_hallucination_guard",
+              "name": "Grounded Output Factuality Check",
+              "description": "Prevents drafting unauthorized financial amounts or unverifiable commitments",
+              "passed": true,
+              "actual_value": "Compliant",
+              "threshold": "100% grounded facts",
+              "reason": "Draft strictly reflects precedent without hallucinating unverified figures",
+              "severity": "blocker"
+            }
+          ],
+          "trigger_reasons": [],
+          "routed_queue": null,
+          "audit_explanation": "All 6 auditable rules passed with high confidence and verified precedent grounding. Auto-handling approved."
+        },
+        "total_latency_ms": 6
+      },
+      "judge": {
+        "test_case_id": "gold_003",
+        "groundedness": 4,
+        "tone_match": 4,
+        "resolution_quality": 4,
+        "hallucination_flag": 0,
+        "notes": "[fake-llm] heuristic score based on precedent availability only.",
+        "overall_score": 4.0
+      },
+      "is_correct_intent": true,
+      "escalation_matches_expected": true
+    },
+    {
+      "test_case": {
+        "id": "gold_004",
+        "customer_msg": "not getting the password reset email at all",
+        "ground_truth_intent": "account_login_auth",
+        "ground_truth_resolution": "Check spam folder; confirm reset is going to the correct account email.",
+        "difficulty": "medium",
+        "expected_action": "auto_handle",
+        "risk_factors": []
+      },
+      "pipeline_result": {
+        "id": "exec_768af050d365",
+        "timestamp": "2026-09-12T20:44:51.873007+00:00",
+        "message_text": "not getting the password reset email at all",
+        "message_author": "@golden_set",
+        "classification": {
+          "intent": "account_login_auth",
+          "confidence": 0.9,
+          "reasoning": "[fake-llm] keyword rule matched intent=account_login_auth",
+          "sentiment": "neutral",
+          "urgency": "low",
+          "latency_ms": 0
+        },
+        "retrieval": {
+          "precedents": [
+            {
+              "customer_msg": "I forgot my password and the reset email never arrives",
+              "resolution": "Try checking your spam folder first. If it's not there, go to ourapp.com/reset and make sure you're using the email on your account. ^Demo",
+              "similarity": 0.8901346921920776
+            },
+            {
+              "customer_msg": "Someone logged into my account from another country and changed my email",
+              "resolution": "This needs immediate attention -- please go to ourapp.com/secure-account to lock your account, our safety team will follow up directly. ^Demo",
+              "similarity": 0.46050798892974854
+            },
+            {
+              "customer_msg": "I was charged twice this month for my subscription, $12.99 twice",
+              "resolution": "That looks like a duplicate charge. Check your receipts at ourapp.com/account -- if you see two charges on the same date we'll refund the extra one within 3-5 business days. ^Demo",
+              "similarity": 0.3019968271255493
+            }
+          ],
+          "top_similarity": 0.8901346921920776,
+          "latency_ms": 6
+        },
+        "draft": {
+          "text": "Try checking your spam folder first. If it's not there, go to ourapp.com/reset and make sure you're using the email on your account. ^Demo",
+          "grounding_source_count": 3,
+          "signoff_used": "^Demo",
+          "latency_ms": 0
+        },
+        "escalation": {
+          "decision": "auto_handle",
+          "rules": [
+            {
+              "id": "rule_confidence",
+              "name": "Intent Classification Confidence",
+              "description": "Requires classification confidence >= 76%",
+              "passed": true,
+              "actual_value": "90.0%",
+              "threshold": ">= 76%",
+              "reason": "Intent confidently detected by classifier",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_grounding",
+              "name": "Historical Precedent Grounding",
+              "description": "Requires top precedent similarity >= 58%",
+              "passed": true,
+              "actual_value": "89.0%",
+              "threshold": ">= 58%",
+              "reason": "Strong precedent grounding (89.0% cosine match)",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_risk_keywords",
+              "name": "High-Risk & Legal Keyword Scan",
+              "description": "Screens for litigation, regulatory complaints, fraud, or chargeback threats",
+              "passed": true,
+              "actual_value": "None detected",
+              "threshold": "0 sensitive keywords",
+              "reason": "No high-risk litigation or fraud keywords found",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_sentiment",
+              "name": "Customer Distress & Hostility Check",
+              "description": "Requires human escalation when severe customer rage or hostility is detected",
+              "passed": true,
+              "actual_value": "neutral (urgency: low)",
+              "threshold": "Non-furious / non-critical",
+              "reason": "Customer tone within standard operational tolerance",
+              "severity": "warning"
+            },
+            {
+              "id": "rule_intent_restriction",
+              "name": "Policy-Restricted Intent Check",
+              "description": "Guarantees human review for sensitive categories (e.g. security compromise)",
+              "passed": true,
+              "actual_value": "account_login_auth",
+              "threshold": "Not on mandatory escalation list",
+              "reason": "Intent is authorized for automated handling",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_hallucination_guard",
+              "name": "Grounded Output Factuality Check",
+              "description": "Prevents drafting unauthorized financial amounts or unverifiable commitments",
+              "passed": true,
+              "actual_value": "Compliant",
+              "threshold": "100% grounded facts",
+              "reason": "Draft strictly reflects precedent without hallucinating unverified figures",
+              "severity": "blocker"
+            }
+          ],
+          "trigger_reasons": [],
+          "routed_queue": null,
+          "audit_explanation": "All 6 auditable rules passed with high confidence and verified precedent grounding. Auto-handling approved."
+        },
+        "total_latency_ms": 6
+      },
+      "judge": {
+        "test_case_id": "gold_004",
+        "groundedness": 4,
+        "tone_match": 4,
+        "resolution_quality": 4,
+        "hallucination_flag": 0,
+        "notes": "[fake-llm] heuristic score based on precedent availability only.",
+        "overall_score": 4.0
+      },
+      "is_correct_intent": true,
+      "escalation_matches_expected": true
+    },
+    {
+      "test_case": {
+        "id": "gold_005",
+        "customer_msg": "cannot find where the dark theme option is in settings",
+        "ground_truth_intent": "how_to_or_feature_question",
+        "ground_truth_resolution": "Settings > Appearance > Dark Mode toggle.",
+        "difficulty": "easy",
+        "expected_action": "auto_handle",
+        "risk_factors": []
+      },
+      "pipeline_result": {
+        "id": "exec_68386936ac5c",
+        "timestamp": "2026-09-12T20:44:51.879136+00:00",
+        "message_text": "cannot find where the dark theme option is in settings",
+        "message_author": "@golden_set",
+        "classification": {
+          "intent": "how_to_or_feature_question",
+          "confidence": 0.6,
+          "reasoning": "[fake-llm] keyword rule matched intent=how_to_or_feature_question",
+          "sentiment": "neutral",
+          "urgency": "low",
+          "latency_ms": 0
+        },
+        "retrieval": {
+          "precedents": [
+            {
+              "customer_msg": "Where is the dark mode setting? I can't find it",
+              "resolution": "It's under Settings > Appearance > Dark Mode. Toggle it on and it applies instantly. ^Demo",
+              "similarity": 0.7845956087112427
+            },
+            {
+              "customer_msg": "My app keeps crashing every time I open it on iOS 17",
+              "resolution": "Sorry about that! Please delete the app, restart your phone, and reinstall from the App Store -- that clears the cache causing crashes. ^Demo",
+              "similarity": 0.11623144894838333
+            },
+            {
+              "customer_msg": "I forgot my password and the reset email never arrives",
+              "resolution": "Try checking your spam folder first. If it's not there, go to ourapp.com/reset and make sure you're using the email on your account. ^Demo",
+              "similarity": 0.1147971823811531
+            }
+          ],
+          "top_similarity": 0.7845956087112427,
+          "latency_ms": 6
+        },
+        "draft": {
+          "text": "It's under Settings > Appearance > Dark Mode. Toggle it on and it applies instantly. ^Demo",
+          "grounding_source_count": 3,
+          "signoff_used": "^Demo",
+          "latency_ms": 0
+        },
+        "escalation": {
+          "decision": "escalate",
+          "rules": [
+            {
+              "id": "rule_confidence",
+              "name": "Intent Classification Confidence",
+              "description": "Requires classification confidence >= 76%",
+              "passed": false,
+              "actual_value": "60.0%",
+              "threshold": ">= 76%",
+              "reason": "Confidence (60.0%) below safe automation cutoff",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_grounding",
+              "name": "Historical Precedent Grounding",
+              "description": "Requires top precedent similarity >= 58%",
+              "passed": true,
+              "actual_value": "78.5%",
+              "threshold": ">= 58%",
+              "reason": "Strong precedent grounding (78.5% cosine match)",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_risk_keywords",
+              "name": "High-Risk & Legal Keyword Scan",
+              "description": "Screens for litigation, regulatory complaints, fraud, or chargeback threats",
+              "passed": true,
+              "actual_value": "None detected",
+              "threshold": "0 sensitive keywords",
+              "reason": "No high-risk litigation or fraud keywords found",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_sentiment",
+              "name": "Customer Distress & Hostility Check",
+              "description": "Requires human escalation when severe customer rage or hostility is detected",
+              "passed": true,
+              "actual_value": "neutral (urgency: low)",
+              "threshold": "Non-furious / non-critical",
+              "reason": "Customer tone within standard operational tolerance",
+              "severity": "warning"
+            },
+            {
+              "id": "rule_intent_restriction",
+              "name": "Policy-Restricted Intent Check",
+              "description": "Guarantees human review for sensitive categories (e.g. security compromise)",
+              "passed": true,
+              "actual_value": "how_to_or_feature_question",
+              "threshold": "Not on mandatory escalation list",
+              "reason": "Intent is authorized for automated handling",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_hallucination_guard",
+              "name": "Grounded Output Factuality Check",
+              "description": "Prevents drafting unauthorized financial amounts or unverifiable commitments",
+              "passed": true,
+              "actual_value": "Compliant",
+              "threshold": "100% grounded facts",
+              "reason": "Draft strictly reflects precedent without hallucinating unverified figures",
+              "severity": "blocker"
+            }
+          ],
+          "trigger_reasons": [
+            "Confidence (60.0%) < 76% threshold"
+          ],
+          "routed_queue": "General Tier-1 Human Queue",
+          "audit_explanation": "Escalation triggered by 1 rule violation(s): Confidence (60.0%) < 76% threshold. Routed to General Tier-1 Human Queue."
+        },
+        "total_latency_ms": 6
+      },
+      "judge": {
+        "test_case_id": "gold_005",
+        "groundedness": 4,
+        "tone_match": 4,
+        "resolution_quality": 4,
+        "hallucination_flag": 0,
+        "notes": "[fake-llm] heuristic score based on precedent availability only.",
+        "overall_score": 4.0
+      },
+      "is_correct_intent": true,
+      "escalation_matches_expected": false
+    },
+    {
+      "test_case": {
+        "id": "gold_006",
+        "customer_msg": "someone made an unauthorized change to my account email, this wasn't me",
+        "ground_truth_intent": "account_security_breach",
+        "ground_truth_resolution": "Direct to secure-account lockdown flow immediately; safety team follow-up, do not auto-reply.",
+        "difficulty": "hard",
+        "expected_action": "escalate",
+        "risk_factors": [
+          "account_takeover"
+        ]
+      },
+      "pipeline_result": {
+        "id": "exec_85b00918197d",
+        "timestamp": "2026-09-12T20:44:51.886136+00:00",
+        "message_text": "someone made an unauthorized change to my account email, this wasn't me",
+        "message_author": "@golden_set",
+        "classification": {
+          "intent": "account_security_breach",
+          "confidence": 0.9,
+          "reasoning": "[fake-llm] keyword rule matched intent=account_security_breach",
+          "sentiment": "neutral",
+          "urgency": "low",
+          "latency_ms": 0
+        },
+        "retrieval": {
+          "precedents": [
+            {
+              "customer_msg": "Someone logged into my account from another country and changed my email",
+              "resolution": "This needs immediate attention -- please go to ourapp.com/secure-account to lock your account, our safety team will follow up directly. ^Demo",
+              "similarity": 0.7687948942184448
+            },
+            {
+              "customer_msg": "I forgot my password and the reset email never arrives",
+              "resolution": "Try checking your spam folder first. If it's not there, go to ourapp.com/reset and make sure you're using the email on your account. ^Demo",
+              "similarity": 0.5676603317260742
+            },
+            {
+              "customer_msg": "I was charged twice this month for my subscription, $12.99 twice",
+              "resolution": "That looks like a duplicate charge. Check your receipts at ourapp.com/account -- if you see two charges on the same date we'll refund the extra one within 3-5 business days. ^Demo",
+              "similarity": 0.3187504708766937
+            }
+          ],
+          "top_similarity": 0.7687948942184448,
+          "latency_ms": 6
+        },
+        "draft": {
+          "text": "This needs immediate attention -- please go to ourapp.com/secure-account to lock your account, our safety team will follow up directly. ^Demo",
+          "grounding_source_count": 3,
+          "signoff_used": "^Demo",
+          "latency_ms": 0
+        },
+        "escalation": {
+          "decision": "escalate",
+          "rules": [
+            {
+              "id": "rule_confidence",
+              "name": "Intent Classification Confidence",
+              "description": "Requires classification confidence >= 76%",
+              "passed": true,
+              "actual_value": "90.0%",
+              "threshold": ">= 76%",
+              "reason": "Intent confidently detected by classifier",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_grounding",
+              "name": "Historical Precedent Grounding",
+              "description": "Requires top precedent similarity >= 58%",
+              "passed": true,
+              "actual_value": "76.9%",
+              "threshold": ">= 58%",
+              "reason": "Strong precedent grounding (76.9% cosine match)",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_risk_keywords",
+              "name": "High-Risk & Legal Keyword Scan",
+              "description": "Screens for litigation, regulatory complaints, fraud, or chargeback threats",
+              "passed": true,
+              "actual_value": "None detected",
+              "threshold": "0 sensitive keywords",
+              "reason": "No high-risk litigation or fraud keywords found",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_sentiment",
+              "name": "Customer Distress & Hostility Check",
+              "description": "Requires human escalation when severe customer rage or hostility is detected",
+              "passed": true,
+              "actual_value": "neutral (urgency: low)",
+              "threshold": "Non-furious / non-critical",
+              "reason": "Customer tone within standard operational tolerance",
+              "severity": "warning"
+            },
+            {
+              "id": "rule_intent_restriction",
+              "name": "Policy-Restricted Intent Check",
+              "description": "Guarantees human review for sensitive categories (e.g. security compromise)",
+              "passed": false,
+              "actual_value": "account_security_breach",
+              "threshold": "Not on mandatory escalation list",
+              "reason": "Intent [account_security_breach] is flagged for mandatory specialist review",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_hallucination_guard",
+              "name": "Grounded Output Factuality Check",
+              "description": "Prevents drafting unauthorized financial amounts or unverifiable commitments",
+              "passed": true,
+              "actual_value": "Compliant",
+              "threshold": "100% grounded facts",
+              "reason": "Draft strictly reflects precedent without hallucinating unverified figures",
+              "severity": "blocker"
+            }
+          ],
+          "trigger_reasons": [
+            "Mandatory escalation policy for intent: account_security_breach"
+          ],
+          "routed_queue": "Tier-2 Trust & Safety",
+          "audit_explanation": "Escalation triggered by 1 rule violation(s): Mandatory escalation policy for intent: account_security_breach. Routed to Tier-2 Trust & Safety."
+        },
+        "total_latency_ms": 7
+      },
+      "judge": {
+        "test_case_id": "gold_006",
+        "groundedness": 4,
+        "tone_match": 4,
+        "resolution_quality": 4,
+        "hallucination_flag": 0,
+        "notes": "[fake-llm] heuristic score based on precedent availability only.",
+        "overall_score": 4.0
+      },
+      "is_correct_intent": true,
+      "escalation_matches_expected": true
+    },
+    {
+      "test_case": {
+        "id": "gold_007",
+        "customer_msg": "my package tracking says delivered but nothing showed up at my door",
+        "ground_truth_intent": "order_or_delivery_status",
+        "ground_truth_resolution": "Wait 24h for tracking to update, then file a Problem with Order for replacement.",
+        "difficulty": "medium",
+        "expected_action": "auto_handle",
+        "risk_factors": []
+      },
+      "pipeline_result": {
+        "id": "exec_3c0107e04b41",
+        "timestamp": "2026-09-12T20:44:51.894474+00:00",
+        "message_text": "my package tracking says delivered but nothing showed up at my door",
+        "message_author": "@golden_set",
+        "classification": {
+          "intent": "order_or_delivery_status",
+          "confidence": 0.9,
+          "reasoning": "[fake-llm] keyword rule matched intent=order_or_delivery_status",
+          "sentiment": "neutral",
+          "urgency": "low",
+          "latency_ms": 0
+        },
+        "retrieval": {
+          "precedents": [
+            {
+              "customer_msg": "My order says delivered but I never received the package",
+              "resolution": "Sorry to hear that! Carriers sometimes mark packages delivered early. If it hasn't shown up in 24 hours, go to Your Orders > Problem with Order for a replacement. ^Demo",
+              "similarity": 0.6849623322486877
+            },
+            {
+              "customer_msg": "I forgot my password and the reset email never arrives",
+              "resolution": "Try checking your spam folder first. If it's not there, go to ourapp.com/reset and make sure you're using the email on your account. ^Demo",
+              "similarity": 0.2552609443664551
+            },
+            {
+              "customer_msg": "The checkout page freezes when I try to pay with a new card",
+              "resolution": "Sorry about that! Try switching to a different browser or clearing your cache -- the checkout freeze usually clears up right after. ^Demo",
+              "similarity": 0.21792106330394745
+            }
+          ],
+          "top_similarity": 0.6849623322486877,
+          "latency_ms": 9
+        },
+        "draft": {
+          "text": "Sorry to hear that! Carriers sometimes mark packages delivered early. If it hasn't shown up in 24 hours, go to Your Orders > Problem with Order for a replacement. ^Demo",
+          "grounding_source_count": 3,
+          "signoff_used": "^Demo",
+          "latency_ms": 0
+        },
+        "escalation": {
+          "decision": "auto_handle",
+          "rules": [
+            {
+              "id": "rule_confidence",
+              "name": "Intent Classification Confidence",
+              "description": "Requires classification confidence >= 76%",
+              "passed": true,
+              "actual_value": "90.0%",
+              "threshold": ">= 76%",
+              "reason": "Intent confidently detected by classifier",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_grounding",
+              "name": "Historical Precedent Grounding",
+              "description": "Requires top precedent similarity >= 58%",
+              "passed": true,
+              "actual_value": "68.5%",
+              "threshold": ">= 58%",
+              "reason": "Strong precedent grounding (68.5% cosine match)",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_risk_keywords",
+              "name": "High-Risk & Legal Keyword Scan",
+              "description": "Screens for litigation, regulatory complaints, fraud, or chargeback threats",
+              "passed": true,
+              "actual_value": "None detected",
+              "threshold": "0 sensitive keywords",
+              "reason": "No high-risk litigation or fraud keywords found",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_sentiment",
+              "name": "Customer Distress & Hostility Check",
+              "description": "Requires human escalation when severe customer rage or hostility is detected",
+              "passed": true,
+              "actual_value": "neutral (urgency: low)",
+              "threshold": "Non-furious / non-critical",
+              "reason": "Customer tone within standard operational tolerance",
+              "severity": "warning"
+            },
+            {
+              "id": "rule_intent_restriction",
+              "name": "Policy-Restricted Intent Check",
+              "description": "Guarantees human review for sensitive categories (e.g. security compromise)",
+              "passed": true,
+              "actual_value": "order_or_delivery_status",
+              "threshold": "Not on mandatory escalation list",
+              "reason": "Intent is authorized for automated handling",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_hallucination_guard",
+              "name": "Grounded Output Factuality Check",
+              "description": "Prevents drafting unauthorized financial amounts or unverifiable commitments",
+              "passed": true,
+              "actual_value": "Compliant",
+              "threshold": "100% grounded facts",
+              "reason": "Draft strictly reflects precedent without hallucinating unverified figures",
+              "severity": "blocker"
+            }
+          ],
+          "trigger_reasons": [],
+          "routed_queue": null,
+          "audit_explanation": "All 6 auditable rules passed with high confidence and verified precedent grounding. Auto-handling approved."
+        },
+        "total_latency_ms": 9
+      },
+      "judge": {
+        "test_case_id": "gold_007",
+        "groundedness": 4,
+        "tone_match": 4,
+        "resolution_quality": 4,
+        "hallucination_flag": 0,
+        "notes": "[fake-llm] heuristic score based on precedent availability only.",
+        "overall_score": 4.0
+      },
+      "is_correct_intent": true,
+      "escalation_matches_expected": true
+    },
+    {
+      "test_case": {
+        "id": "gold_008",
+        "customer_msg": "update broke the app, it shuts immediately every time now",
+        "ground_truth_intent": "product_issue_or_bug",
+        "ground_truth_resolution": "Clean reinstall resolves the post-update crash for most users.",
+        "difficulty": "easy",
+        "expected_action": "auto_handle",
+        "risk_factors": []
+      },
+      "pipeline_result": {
+        "id": "exec_28959d2258d1",
+        "timestamp": "2026-09-12T20:44:51.902766+00:00",
+        "message_text": "update broke the app, it shuts immediately every time now",
+        "message_author": "@golden_set",
+        "classification": {
+          "intent": "product_issue_or_bug",
+          "confidence": 0.9,
+          "reasoning": "[fake-llm] keyword rule matched intent=product_issue_or_bug",
+          "sentiment": "neutral",
+          "urgency": "low",
+          "latency_ms": 0
+        },
+        "retrieval": {
+          "precedents": [
+            {
+              "customer_msg": "App crashes immediately on launch after the latest update",
+              "resolution": "Thanks for flagging -- try a clean reinstall (delete app, restart device, reinstall). That resolves this for most people after an update. ^Demo",
+              "similarity": 0.7385894060134888
+            },
+            {
+              "customer_msg": "My app keeps crashing every time I open it on iOS 17",
+              "resolution": "Sorry about that! Please delete the app, restart your phone, and reinstall from the App Store -- that clears the cache causing crashes. ^Demo",
+              "similarity": 0.6070244312286377
+            },
+            {
+              "customer_msg": "The checkout page freezes when I try to pay with a new card",
+              "resolution": "Sorry about that! Try switching to a different browser or clearing your cache -- the checkout freeze usually clears up right after. ^Demo",
+              "similarity": 0.31144964694976807
+            }
+          ],
+          "top_similarity": 0.7385894060134888,
+          "latency_ms": 8
+        },
+        "draft": {
+          "text": "Thanks for flagging -- try a clean reinstall (delete app, restart device, reinstall). That resolves this for most people after an update. ^Demo",
+          "grounding_source_count": 3,
+          "signoff_used": "^Demo",
+          "latency_ms": 0
+        },
+        "escalation": {
+          "decision": "auto_handle",
+          "rules": [
+            {
+              "id": "rule_confidence",
+              "name": "Intent Classification Confidence",
+              "description": "Requires classification confidence >= 76%",
+              "passed": true,
+              "actual_value": "90.0%",
+              "threshold": ">= 76%",
+              "reason": "Intent confidently detected by classifier",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_grounding",
+              "name": "Historical Precedent Grounding",
+              "description": "Requires top precedent similarity >= 58%",
+              "passed": true,
+              "actual_value": "73.9%",
+              "threshold": ">= 58%",
+              "reason": "Strong precedent grounding (73.9% cosine match)",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_risk_keywords",
+              "name": "High-Risk & Legal Keyword Scan",
+              "description": "Screens for litigation, regulatory complaints, fraud, or chargeback threats",
+              "passed": true,
+              "actual_value": "None detected",
+              "threshold": "0 sensitive keywords",
+              "reason": "No high-risk litigation or fraud keywords found",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_sentiment",
+              "name": "Customer Distress & Hostility Check",
+              "description": "Requires human escalation when severe customer rage or hostility is detected",
+              "passed": true,
+              "actual_value": "neutral (urgency: low)",
+              "threshold": "Non-furious / non-critical",
+              "reason": "Customer tone within standard operational tolerance",
+              "severity": "warning"
+            },
+            {
+              "id": "rule_intent_restriction",
+              "name": "Policy-Restricted Intent Check",
+              "description": "Guarantees human review for sensitive categories (e.g. security compromise)",
+              "passed": true,
+              "actual_value": "product_issue_or_bug",
+              "threshold": "Not on mandatory escalation list",
+              "reason": "Intent is authorized for automated handling",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_hallucination_guard",
+              "name": "Grounded Output Factuality Check",
+              "description": "Prevents drafting unauthorized financial amounts or unverifiable commitments",
+              "passed": true,
+              "actual_value": "Compliant",
+              "threshold": "100% grounded facts",
+              "reason": "Draft strictly reflects precedent without hallucinating unverified figures",
+              "severity": "blocker"
+            }
+          ],
+          "trigger_reasons": [],
+          "routed_queue": null,
+          "audit_explanation": "All 6 auditable rules passed with high confidence and verified precedent grounding. Auto-handling approved."
+        },
+        "total_latency_ms": 8
+      },
+      "judge": {
+        "test_case_id": "gold_008",
+        "groundedness": 4,
+        "tone_match": 4,
+        "resolution_quality": 4,
+        "hallucination_flag": 0,
+        "notes": "[fake-llm] heuristic score based on precedent availability only.",
+        "overall_score": 4.0
+      },
+      "is_correct_intent": true,
+      "escalation_matches_expected": true
+    },
+    {
+      "test_case": {
+        "id": "gold_009",
+        "customer_msg": "the payment page freezes when I try to add a new card",
+        "ground_truth_intent": "product_issue_or_bug",
+        "ground_truth_resolution": "Try a different browser or clear cache to resolve the checkout freeze.",
+        "difficulty": "medium",
+        "expected_action": "auto_handle",
+        "risk_factors": []
+      },
+      "pipeline_result": {
+        "id": "exec_63c79393d83c",
+        "timestamp": "2026-09-12T20:44:51.909150+00:00",
+        "message_text": "the payment page freezes when I try to add a new card",
+        "message_author": "@golden_set",
+        "classification": {
+          "intent": "product_issue_or_bug",
+          "confidence": 0.9,
+          "reasoning": "[fake-llm] keyword rule matched intent=product_issue_or_bug",
+          "sentiment": "neutral",
+          "urgency": "low",
+          "latency_ms": 0
+        },
+        "retrieval": {
+          "precedents": [
+            {
+              "customer_msg": "The checkout page freezes when I try to pay with a new card",
+              "resolution": "Sorry about that! Try switching to a different browser or clearing your cache -- the checkout freeze usually clears up right after. ^Demo",
+              "similarity": 0.9087914228439331
+            },
+            {
+              "customer_msg": "I was charged twice this month for my subscription, $12.99 twice",
+              "resolution": "That looks like a duplicate charge. Check your receipts at ourapp.com/account -- if you see two charges on the same date we'll refund the extra one within 3-5 business days. ^Demo",
+              "similarity": 0.25428953766822815
+            },
+            {
+              "customer_msg": "How do I cancel my premium plan before renewal?",
+              "resolution": "You can cancel anytime from Settings > Plan > Cancel Subscription. You'll keep access until the end of your current billing period. ^Demo",
+              "similarity": 0.24997100234031677
+            }
+          ],
+          "top_similarity": 0.9087914228439331,
+          "latency_ms": 6
+        },
+        "draft": {
+          "text": "Sorry about that! Try switching to a different browser or clearing your cache -- the checkout freeze usually clears up right after. ^Demo",
+          "grounding_source_count": 3,
+          "signoff_used": "^Demo",
+          "latency_ms": 0
+        },
+        "escalation": {
+          "decision": "auto_handle",
+          "rules": [
+            {
+              "id": "rule_confidence",
+              "name": "Intent Classification Confidence",
+              "description": "Requires classification confidence >= 76%",
+              "passed": true,
+              "actual_value": "90.0%",
+              "threshold": ">= 76%",
+              "reason": "Intent confidently detected by classifier",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_grounding",
+              "name": "Historical Precedent Grounding",
+              "description": "Requires top precedent similarity >= 58%",
+              "passed": true,
+              "actual_value": "90.9%",
+              "threshold": ">= 58%",
+              "reason": "Strong precedent grounding (90.9% cosine match)",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_risk_keywords",
+              "name": "High-Risk & Legal Keyword Scan",
+              "description": "Screens for litigation, regulatory complaints, fraud, or chargeback threats",
+              "passed": true,
+              "actual_value": "None detected",
+              "threshold": "0 sensitive keywords",
+              "reason": "No high-risk litigation or fraud keywords found",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_sentiment",
+              "name": "Customer Distress & Hostility Check",
+              "description": "Requires human escalation when severe customer rage or hostility is detected",
+              "passed": true,
+              "actual_value": "neutral (urgency: low)",
+              "threshold": "Non-furious / non-critical",
+              "reason": "Customer tone within standard operational tolerance",
+              "severity": "warning"
+            },
+            {
+              "id": "rule_intent_restriction",
+              "name": "Policy-Restricted Intent Check",
+              "description": "Guarantees human review for sensitive categories (e.g. security compromise)",
+              "passed": true,
+              "actual_value": "product_issue_or_bug",
+              "threshold": "Not on mandatory escalation list",
+              "reason": "Intent is authorized for automated handling",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_hallucination_guard",
+              "name": "Grounded Output Factuality Check",
+              "description": "Prevents drafting unauthorized financial amounts or unverifiable commitments",
+              "passed": true,
+              "actual_value": "Compliant",
+              "threshold": "100% grounded facts",
+              "reason": "Draft strictly reflects precedent without hallucinating unverified figures",
+              "severity": "blocker"
+            }
+          ],
+          "trigger_reasons": [],
+          "routed_queue": null,
+          "audit_explanation": "All 6 auditable rules passed with high confidence and verified precedent grounding. Auto-handling approved."
+        },
+        "total_latency_ms": 7
+      },
+      "judge": {
+        "test_case_id": "gold_009",
+        "groundedness": 4,
+        "tone_match": 4,
+        "resolution_quality": 4,
+        "hallucination_flag": 0,
+        "notes": "[fake-llm] heuristic score based on precedent availability only.",
+        "overall_score": 4.0
+      },
+      "is_correct_intent": true,
+      "escalation_matches_expected": true
+    },
+    {
+      "test_case": {
+        "id": "gold_010",
+        "customer_msg": "can my friend listen to my playlist without making an account",
+        "ground_truth_intent": "how_to_or_feature_question",
+        "ground_truth_resolution": "Share link gives a preview without an account; full access needs a free account.",
+        "difficulty": "easy",
+        "expected_action": "auto_handle",
+        "risk_factors": []
+      },
+      "pipeline_result": {
+        "id": "exec_e50db05a7efc",
+        "timestamp": "2026-09-12T20:44:51.916238+00:00",
+        "message_text": "can my friend listen to my playlist without making an account",
+        "message_author": "@golden_set",
+        "classification": {
+          "intent": "how_to_or_feature_question",
+          "confidence": 0.6,
+          "reasoning": "[fake-llm] keyword rule matched intent=how_to_or_feature_question",
+          "sentiment": "neutral",
+          "urgency": "low",
+          "latency_ms": 0
+        },
+        "retrieval": {
+          "precedents": [
+            {
+              "customer_msg": "Can I share my playlist with a friend who doesn't have an account?",
+              "resolution": "Yes! Use the Share button and send the link -- they can listen to a preview without signing up, full access needs a free account. ^Demo",
+              "similarity": 0.8736200332641602
+            },
+            {
+              "customer_msg": "I was charged twice this month for my subscription, $12.99 twice",
+              "resolution": "That looks like a duplicate charge. Check your receipts at ourapp.com/account -- if you see two charges on the same date we'll refund the extra one within 3-5 business days. ^Demo",
+              "similarity": 0.12658217549324036
+            },
+            {
+              "customer_msg": "Someone logged into my account from another country and changed my email",
+              "resolution": "This needs immediate attention -- please go to ourapp.com/secure-account to lock your account, our safety team will follow up directly. ^Demo",
+              "similarity": 0.11204957962036133
+            }
+          ],
+          "top_similarity": 0.8736200332641602,
+          "latency_ms": 7
+        },
+        "draft": {
+          "text": "Yes! Use the Share button and send the link -- they can listen to a preview without signing up, full access needs a free account. ^Demo",
+          "grounding_source_count": 3,
+          "signoff_used": "^Demo",
+          "latency_ms": 0
+        },
+        "escalation": {
+          "decision": "escalate",
+          "rules": [
+            {
+              "id": "rule_confidence",
+              "name": "Intent Classification Confidence",
+              "description": "Requires classification confidence >= 76%",
+              "passed": false,
+              "actual_value": "60.0%",
+              "threshold": ">= 76%",
+              "reason": "Confidence (60.0%) below safe automation cutoff",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_grounding",
+              "name": "Historical Precedent Grounding",
+              "description": "Requires top precedent similarity >= 58%",
+              "passed": true,
+              "actual_value": "87.4%",
+              "threshold": ">= 58%",
+              "reason": "Strong precedent grounding (87.4% cosine match)",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_risk_keywords",
+              "name": "High-Risk & Legal Keyword Scan",
+              "description": "Screens for litigation, regulatory complaints, fraud, or chargeback threats",
+              "passed": true,
+              "actual_value": "None detected",
+              "threshold": "0 sensitive keywords",
+              "reason": "No high-risk litigation or fraud keywords found",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_sentiment",
+              "name": "Customer Distress & Hostility Check",
+              "description": "Requires human escalation when severe customer rage or hostility is detected",
+              "passed": true,
+              "actual_value": "neutral (urgency: low)",
+              "threshold": "Non-furious / non-critical",
+              "reason": "Customer tone within standard operational tolerance",
+              "severity": "warning"
+            },
+            {
+              "id": "rule_intent_restriction",
+              "name": "Policy-Restricted Intent Check",
+              "description": "Guarantees human review for sensitive categories (e.g. security compromise)",
+              "passed": true,
+              "actual_value": "how_to_or_feature_question",
+              "threshold": "Not on mandatory escalation list",
+              "reason": "Intent is authorized for automated handling",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_hallucination_guard",
+              "name": "Grounded Output Factuality Check",
+              "description": "Prevents drafting unauthorized financial amounts or unverifiable commitments",
+              "passed": true,
+              "actual_value": "Compliant",
+              "threshold": "100% grounded facts",
+              "reason": "Draft strictly reflects precedent without hallucinating unverified figures",
+              "severity": "blocker"
+            }
+          ],
+          "trigger_reasons": [
+            "Confidence (60.0%) < 76% threshold"
+          ],
+          "routed_queue": "General Tier-1 Human Queue",
+          "audit_explanation": "Escalation triggered by 1 rule violation(s): Confidence (60.0%) < 76% threshold. Routed to General Tier-1 Human Queue."
+        },
+        "total_latency_ms": 7
+      },
+      "judge": {
+        "test_case_id": "gold_010",
+        "groundedness": 4,
+        "tone_match": 4,
+        "resolution_quality": 4,
+        "hallucination_flag": 0,
+        "notes": "[fake-llm] heuristic score based on precedent availability only.",
+        "overall_score": 4.0
+      },
+      "is_correct_intent": true,
+      "escalation_matches_expected": false
+    },
+    {
+      "test_case": {
+        "id": "gold_011",
+        "customer_msg": "this is absolutely unacceptable, I'm contacting my lawyer and the FTC about these charges!!",
+        "ground_truth_intent": "legal_regulatory_threat",
+        "ground_truth_resolution": "Immediate human escalation to legal/regulatory triage; do not auto-reply to a legal threat.",
+        "difficulty": "adversarial",
+        "expected_action": "escalate",
+        "risk_factors": [
+          "legal_threat",
+          "furious_sentiment"
+        ]
+      },
+      "pipeline_result": {
+        "id": "exec_7668a75c7c83",
+        "timestamp": "2026-09-12T20:44:51.923127+00:00",
+        "message_text": "this is absolutely unacceptable, I'm contacting my lawyer and the FTC about these charges!!",
+        "message_author": "@golden_set",
+        "classification": {
+          "intent": "legal_regulatory_threat",
+          "confidence": 0.9,
+          "reasoning": "[fake-llm] keyword rule matched intent=legal_regulatory_threat",
+          "sentiment": "furious",
+          "urgency": "critical",
+          "latency_ms": 0
+        },
+        "retrieval": {
+          "precedents": [
+            {
+              "customer_msg": "I was charged twice this month for my subscription, $12.99 twice",
+              "resolution": "That looks like a duplicate charge. Check your receipts at ourapp.com/account -- if you see two charges on the same date we'll refund the extra one within 3-5 business days. ^Demo",
+              "similarity": 0.34977588057518005
+            },
+            {
+              "customer_msg": "I forgot my password and the reset email never arrives",
+              "resolution": "Try checking your spam folder first. If it's not there, go to ourapp.com/reset and make sure you're using the email on your account. ^Demo",
+              "similarity": 0.19291213154792786
+            },
+            {
+              "customer_msg": "How do I cancel my premium plan before renewal?",
+              "resolution": "You can cancel anytime from Settings > Plan > Cancel Subscription. You'll keep access until the end of your current billing period. ^Demo",
+              "similarity": 0.18616220355033875
+            }
+          ],
+          "top_similarity": 0.34977588057518005,
+          "latency_ms": 7
+        },
+        "draft": {
+          "text": "That looks like a duplicate charge. Check your receipts at ourapp.com/account -- if you see two charges on the same date we'll refund the extra one within 3-5 business days. ^Demo",
+          "grounding_source_count": 3,
+          "signoff_used": "^Demo",
+          "latency_ms": 0
+        },
+        "escalation": {
+          "decision": "escalate",
+          "rules": [
+            {
+              "id": "rule_confidence",
+              "name": "Intent Classification Confidence",
+              "description": "Requires classification confidence >= 76%",
+              "passed": true,
+              "actual_value": "90.0%",
+              "threshold": ">= 76%",
+              "reason": "Intent confidently detected by classifier",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_grounding",
+              "name": "Historical Precedent Grounding",
+              "description": "Requires top precedent similarity >= 58%",
+              "passed": false,
+              "actual_value": "35.0%",
+              "threshold": ">= 58%",
+              "reason": "Precedent similarity (35.0%) below verified resolution threshold",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_risk_keywords",
+              "name": "High-Risk & Legal Keyword Scan",
+              "description": "Screens for litigation, regulatory complaints, fraud, or chargeback threats",
+              "passed": false,
+              "actual_value": "lawyer, ftc",
+              "threshold": "0 sensitive keywords",
+              "reason": "Flagged sensitive keyword(s): [lawyer, ftc]",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_sentiment",
+              "name": "Customer Distress & Hostility Check",
+              "description": "Requires human escalation when severe customer rage or hostility is detected",
+              "passed": false,
+              "actual_value": "furious (urgency: critical)",
+              "threshold": "Non-furious / non-critical",
+              "reason": "Severe customer distress detected; human empathy required",
+              "severity": "warning"
+            },
+            {
+              "id": "rule_intent_restriction",
+              "name": "Policy-Restricted Intent Check",
+              "description": "Guarantees human review for sensitive categories (e.g. security compromise)",
+              "passed": false,
+              "actual_value": "legal_regulatory_threat",
+              "threshold": "Not on mandatory escalation list",
+              "reason": "Intent [legal_regulatory_threat] is flagged for mandatory specialist review",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_hallucination_guard",
+              "name": "Grounded Output Factuality Check",
+              "description": "Prevents drafting unauthorized financial amounts or unverifiable commitments",
+              "passed": true,
+              "actual_value": "Compliant",
+              "threshold": "100% grounded facts",
+              "reason": "Draft strictly reflects precedent without hallucinating unverified figures",
+              "severity": "blocker"
+            }
+          ],
+          "trigger_reasons": [
+            "Grounding similarity (35.0%) < 58%",
+            "High-risk keyword trigger: lawyer, ftc",
+            "Customer distress: furious tone or critical urgency",
+            "Mandatory escalation policy for intent: legal_regulatory_threat"
+          ],
+          "routed_queue": "Legal & Regulatory Triage",
+          "audit_explanation": "Escalation triggered by 4 rule violation(s): Grounding similarity (35.0%) < 58%; High-risk keyword trigger: lawyer, ftc; Customer distress: furious tone or critical urgency; Mandatory escalation policy for intent: legal_regulatory_threat. Routed to Legal & Regulatory Triage."
+        },
+        "total_latency_ms": 7
+      },
+      "judge": {
+        "test_case_id": "gold_011",
+        "groundedness": 4,
+        "tone_match": 4,
+        "resolution_quality": 4,
+        "hallucination_flag": 0,
+        "notes": "[fake-llm] heuristic score based on precedent availability only.",
+        "overall_score": 4.0
+      },
+      "is_correct_intent": true,
+      "escalation_matches_expected": true
+    },
+    {
+      "test_case": {
+        "id": "gold_012",
+        "customer_msg": "worst service ever, absolutely furious, this app is trash and a scam!!",
+        "ground_truth_intent": "how_to_or_feature_question",
+        "ground_truth_resolution": "Route to a human given severe distress; underlying issue unclear from message alone.",
+        "difficulty": "adversarial",
+        "expected_action": "escalate",
+        "risk_factors": [
+          "furious_sentiment",
+          "no_clear_intent_signal"
+        ]
+      },
+      "pipeline_result": {
+        "id": "exec_2e8b4e1d07fc",
+        "timestamp": "2026-09-12T20:44:51.929546+00:00",
+        "message_text": "worst service ever, absolutely furious, this app is trash and a scam!!",
+        "message_author": "@golden_set",
+        "classification": {
+          "intent": "how_to_or_feature_question",
+          "confidence": 0.6,
+          "reasoning": "[fake-llm] keyword rule matched intent=how_to_or_feature_question",
+          "sentiment": "furious",
+          "urgency": "critical",
+          "latency_ms": 0
+        },
+        "retrieval": {
+          "precedents": [
+            {
+              "customer_msg": "I was charged twice this month for my subscription, $12.99 twice",
+              "resolution": "That looks like a duplicate charge. Check your receipts at ourapp.com/account -- if you see two charges on the same date we'll refund the extra one within 3-5 business days. ^Demo",
+              "similarity": 0.3478766083717346
+            },
+            {
+              "customer_msg": "My app keeps crashing every time I open it on iOS 17",
+              "resolution": "Sorry about that! Please delete the app, restart your phone, and reinstall from the App Store -- that clears the cache causing crashes. ^Demo",
+              "similarity": 0.28831225633621216
+            },
+            {
+              "customer_msg": "My order says delivered but I never received the package",
+              "resolution": "Sorry to hear that! Carriers sometimes mark packages delivered early. If it hasn't shown up in 24 hours, go to Your Orders > Problem with Order for a replacement. ^Demo",
+              "similarity": 0.23780189454555511
+            }
+          ],
+          "top_similarity": 0.3478766083717346,
+          "latency_ms": 6
+        },
+        "draft": {
+          "text": "That looks like a duplicate charge. Check your receipts at ourapp.com/account -- if you see two charges on the same date we'll refund the extra one within 3-5 business days. ^Demo",
+          "grounding_source_count": 3,
+          "signoff_used": "^Demo",
+          "latency_ms": 0
+        },
+        "escalation": {
+          "decision": "escalate",
+          "rules": [
+            {
+              "id": "rule_confidence",
+              "name": "Intent Classification Confidence",
+              "description": "Requires classification confidence >= 76%",
+              "passed": false,
+              "actual_value": "60.0%",
+              "threshold": ">= 76%",
+              "reason": "Confidence (60.0%) below safe automation cutoff",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_grounding",
+              "name": "Historical Precedent Grounding",
+              "description": "Requires top precedent similarity >= 58%",
+              "passed": false,
+              "actual_value": "34.8%",
+              "threshold": ">= 58%",
+              "reason": "Precedent similarity (34.8%) below verified resolution threshold",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_risk_keywords",
+              "name": "High-Risk & Legal Keyword Scan",
+              "description": "Screens for litigation, regulatory complaints, fraud, or chargeback threats",
+              "passed": false,
+              "actual_value": "scam",
+              "threshold": "0 sensitive keywords",
+              "reason": "Flagged sensitive keyword(s): [scam]",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_sentiment",
+              "name": "Customer Distress & Hostility Check",
+              "description": "Requires human escalation when severe customer rage or hostility is detected",
+              "passed": false,
+              "actual_value": "furious (urgency: critical)",
+              "threshold": "Non-furious / non-critical",
+              "reason": "Severe customer distress detected; human empathy required",
+              "severity": "warning"
+            },
+            {
+              "id": "rule_intent_restriction",
+              "name": "Policy-Restricted Intent Check",
+              "description": "Guarantees human review for sensitive categories (e.g. security compromise)",
+              "passed": true,
+              "actual_value": "how_to_or_feature_question",
+              "threshold": "Not on mandatory escalation list",
+              "reason": "Intent is authorized for automated handling",
+              "severity": "blocker"
+            },
+            {
+              "id": "rule_hallucination_guard",
+              "name": "Grounded Output Factuality Check",
+              "description": "Prevents drafting unauthorized financial amounts or unverifiable commitments",
+              "passed": true,
+              "actual_value": "Compliant",
+              "threshold": "100% grounded facts",
+              "reason": "Draft strictly reflects precedent without hallucinating unverified figures",
+              "severity": "blocker"
+            }
+          ],
+          "trigger_reasons": [
+            "Confidence (60.0%) < 76% threshold",
+            "Grounding similarity (34.8%) < 58%",
+            "High-risk keyword trigger: scam",
+            "Customer distress: furious tone or critical urgency"
+          ],
+          "routed_queue": "Priority Retention Team",
+          "audit_explanation": "Escalation triggered by 4 rule violation(s): Confidence (60.0%) < 76% threshold; Grounding similarity (34.8%) < 58%; High-risk keyword trigger: scam; Customer distress: furious tone or critical urgency. Routed to Priority Retention Team."
+        },
+        "total_latency_ms": 6
+      },
+      "judge": {
+        "test_case_id": "gold_012",
+        "groundedness": 4,
+        "tone_match": 4,
+        "resolution_quality": 4,
+        "hallucination_flag": 0,
+        "notes": "[fake-llm] heuristic score based on precedent availability only.",
+        "overall_score": 4.0
+      },
+      "is_correct_intent": true,
+      "escalation_matches_expected": true
+    }
+  ]
+}

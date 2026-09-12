@@ -1,0 +1,11 @@
+customer_msg,resolution
+My app keeps crashing every time I open it on iOS 17,"Sorry about that! Please delete the app, restart your phone, and reinstall from the App Store -- that clears the cache causing crashes. ^Demo"
+"I was charged twice this month for my subscription, $12.99 twice",That looks like a duplicate charge. Check your receipts at ourapp.com/account -- if you see two charges on the same date we'll refund the extra one within 3-5 business days. ^Demo
+How do I cancel my premium plan before renewal?,You can cancel anytime from Settings > Plan > Cancel Subscription. You'll keep access until the end of your current billing period. ^Demo
+I forgot my password and the reset email never arrives,"Try checking your spam folder first. If it's not there, go to ourapp.com/reset and make sure you're using the email on your account. ^Demo"
+Where is the dark mode setting? I can't find it,It's under Settings > Appearance > Dark Mode. Toggle it on and it applies instantly. ^Demo
+Someone logged into my account from another country and changed my email,"This needs immediate attention -- please go to ourapp.com/secure-account to lock your account, our safety team will follow up directly. ^Demo"
+My order says delivered but I never received the package,"Sorry to hear that! Carriers sometimes mark packages delivered early. If it hasn't shown up in 24 hours, go to Your Orders > Problem with Order for a replacement. ^Demo"
+App crashes immediately on launch after the latest update,"Thanks for flagging -- try a clean reinstall (delete app, restart device, reinstall). That resolves this for most people after an update. ^Demo"
+The checkout page freezes when I try to pay with a new card,Sorry about that! Try switching to a different browser or clearing your cache -- the checkout freeze usually clears up right after. ^Demo
+Can I share my playlist with a friend who doesn't have an account?,"Yes! Use the Share button and send the link -- they can listen to a preview without signing up, full access needs a free account. ^Demo"

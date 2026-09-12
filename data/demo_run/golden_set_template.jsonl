@@ -1,0 +1,12 @@
+{"id": "gold_001", "customer_msg": "My order says delivered but I never received the package", "ground_truth_intent": "", "ground_truth_resolution": "", "difficulty": "", "expected_action": "", "risk_factors": []}
+{"id": "gold_002", "customer_msg": "My app keeps crashing every time I open it on iOS 17", "ground_truth_intent": "", "ground_truth_resolution": "", "difficulty": "", "expected_action": "", "risk_factors": []}
+{"id": "gold_003", "customer_msg": "My account got locked for no reason", "ground_truth_intent": "", "ground_truth_resolution": "", "difficulty": "", "expected_action": "", "risk_factors": []}
+{"id": "gold_004", "customer_msg": "App crashes immediately on launch after the latest update", "ground_truth_intent": "", "ground_truth_resolution": "", "difficulty": "", "expected_action": "", "risk_factors": []}
+{"id": "gold_005", "customer_msg": "I was charged twice this month for my subscription, $12.99 twice", "ground_truth_intent": "", "ground_truth_resolution": "", "difficulty": "", "expected_action": "", "risk_factors": []}
+{"id": "gold_006", "customer_msg": "Where is the dark mode setting? I can't find it", "ground_truth_intent": "", "ground_truth_resolution": "", "difficulty": "", "expected_action": "", "risk_factors": []}
+{"id": "gold_007", "customer_msg": "Why was I charged for something I didn't order?", "ground_truth_intent": "", "ground_truth_resolution": "", "difficulty": "", "expected_action": "", "risk_factors": []}
+{"id": "gold_008", "customer_msg": "Someone logged into my account from another country and changed my email", "ground_truth_intent": "", "ground_truth_resolution": "", "difficulty": "", "expected_action": "", "risk_factors": []}
+{"id": "gold_009", "customer_msg": "I need a refund for a broken item", "ground_truth_intent": "", "ground_truth_resolution": "", "difficulty": "", "expected_action": "", "risk_factors": []}
+{"id": "gold_010", "customer_msg": "How do I cancel my premium plan before renewal?", "ground_truth_intent": "", "ground_truth_resolution": "", "difficulty": "", "expected_action": "", "risk_factors": []}
+{"id": "gold_011", "customer_msg": "The checkout page freezes when I try to pay with a new card", "ground_truth_intent": "", "ground_truth_resolution": "", "difficulty": "", "expected_action": "", "risk_factors": []}
+{"id": "gold_012", "customer_msg": "App won't open at all now", "ground_truth_intent": "", "ground_truth_resolution": "", "difficulty": "", "expected_action": "", "risk_factors": []}
