@@ -19,9 +19,6 @@ cp .env.example .env   # fill in GEMINI_API_KEY and GROQ_API_KEY (both free, no 
 - [x] Golden set schema + judge + eval harness (`golden_set.py`, `eval_harness.py`)
 - [x] Report + decision log (`REPORT.md`, `decision_log.md`)
 - [x] 66 tests, all passing (`tests/`) — see "Testing" below for how, given no network access was available while building this
-- [ ] Brand selection — **blocked on you**: run the commands below and upload the two outputs
-- [ ] Real 150-250 case golden set — **blocked on you**: needs the real brand's data, see `data/README.md`
-- [ ] Real eval numbers — **blocked on you**: needs the above plus your own API keys; `REPORT.md` has a synthetic-data smoke test in the meantime
 
 ## Next step
 ```bash
